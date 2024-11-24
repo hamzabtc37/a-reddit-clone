@@ -66,18 +66,18 @@ pipeline {
 	 stage("Trivy Image Scan") {
              steps {
                  script {
-	              sh ('docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image ashfaque9x/reddit-clone-pipeline:latest --no-progress --scanners vuln  --exit-code 0 --severity HIGH,CRITICAL --format table > trivyimage.txt')
+	              sh ('docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image hambt37/reddit-clone-pipeline:latest --no-progress --scanners vuln  --exit-code 0 --severity HIGH,CRITICAL --format table > trivyimage.txt')
                  }
              }
          }
-	 // stage ('Cleanup Artifacts') {
-  //            steps {
-  //                script {
-  //                     sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
-  //                     sh "docker rmi ${IMAGE_NAME}:latest"
-  //                }
-  //            }
-  //        }
+	 stage ('Cleanup Artifacts') {
+             steps {
+                 script {
+                      sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
+                      sh "docker rmi ${IMAGE_NAME}:latest"
+                 }
+             }
+         }
 	 // stage("Trigger CD Pipeline") {
   //           steps {
   //               script {
