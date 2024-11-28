@@ -78,11 +78,6 @@ pipeline {
                  }
              }
          }
-         stage('Verify Trivy Files') {
-             steps {
-                 sh "ls -l trivyfs.txt trivyimage.txt"
-             }
-         }
 	 // stage("Trigger CD Pipeline") {
   //           steps {
   //               script {
